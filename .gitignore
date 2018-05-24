@@ -5,4 +5,3 @@
 *.mex*
 temp
 **/LOCAL_APPDATA_FONTCONFIG_CACHE/*
-*.png
