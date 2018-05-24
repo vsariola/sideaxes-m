@@ -33,7 +33,39 @@ Usage
 
 ![alt text](https://github.com/vsariola/mat-edge-axes/raw/master/images/coordinatesystem.png "Coordinate systems set up by the edgeaxes.m")
 
-In the typical mode of operation, the newly create axes object shares x-axis with the main plot, and y-axis is pointing away from the main axes. In this new coordinate system, adding tick marks, range frames, marginal distributions etc. becomes a breeze. Some examples you can do with it:
+In the typical mode of operation, the newly create axes object shares x-axis with the main plot, and y-axis is pointing away from the main axes. In this new coordinate system, adding tick marks, range frames, marginal distributions etc. becomes a breeze.
+
+Quick example
+-------------
+
+```
+x = randn(100,1)+0.5;                % synthesize data
+y = randn(100,1);
+axes('Position',[0.05 0.1 0.9 0.9]); % create main axes
+plot(x,y,'.'); 
+set(gca,'visible','off')             % disable matlab's own tick marks
+edgeaxes('south');                   % add edgeaxes to south for ticks
+tick(-5:5);                          % add custom tick marks
+label(-5:5);                         % add custom labels for the tick marks
+rangeline(min(x),quantile(x,0.25));  % show minimum and first quantile
+plot(median(x),0,'k.','MarkerSize',10); % show median as a dot
+label(median(x),[],@(x) sprintf('%.1f',x),'Clipping','off');
+rangeline(quantile(x,0.75),max(x));  % third quantile  
+```
+
+produces:
+
+![alt text](https://github.com/vsariola/mat-edge-axes/raw/master/images/quickexample.png "Quick example plot that shows median, min and maximum on the edge")
+
+Tips for using
+--------------
+
+- Remember to set(gca,'visible','off') for the main plot to disable Matlab's own ticks
+- Study how rangeline.m and tick.m take advantage of the convenient coordinate system so that their implementation is very simple. Writing your own code.
+- The 'side' parameter is stored in the UserData of the axes object created by edgeaxes.m. label.m takes use of this to know on which side to display the labels by default.
+
+More examples
+-------------
 
 Include outside and inside tick marks with different scales, for example inches and centimeters (source: [examples/example_multipleticks.m](examples/example_multipleticks.m))
 
