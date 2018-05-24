@@ -2,9 +2,9 @@
 
 Matlab tools to display rich information on the edges of a plot, inspired by Edward Tufte's range frames, dot dash plots and rug plots.
 
-Matlab's capabilities to display information on the edges of a plot are limited to ticks and labels. Tufte suggests one should use the edges of the plot wisely to display rich information, for example: marginal distributions, rug plots, dot dash plots are all out of question. This is beyond Matlab's usual capabilities.
+Matlab's capabilities to display information on the edges of a plot are limited to ticks and labels. Tufte suggests one should use the edges of the plot wisely to display rich information, for example: marginal distributions, rug plots, dot dash plots etc. These are all beyond Matlab's usual capabilities.
 
-edgeaxes.m solves this problem by setting up a completely new axes object besides the main axes object with a convenient coordinate system. The x-coordinate of the newly created axes is linked to the coordinate system of the original axes object, so that you can use it for example:
+edgeaxes.m solves this problem by setting up a completely new axes object besides the main axes object. The new axes object has a convenient coordinate system. The x-coordinate of the newly created axes is linked to the coordinate system of the original axes object, so that you can use it for example:
 
 - display custom tick marks and labels, for example rug plots
 - display custom range frames or marginal distributions
@@ -13,6 +13,11 @@ edgeaxes.m solves this problem by setting up a completely new axes object beside
 
 Table of Contents
 =================
+
+* [Installation](#installation)
+* [Usage](#usage)
+* [Credits](#credits)
+* [License](#license)
 
 Installation
 ============
