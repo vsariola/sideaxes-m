@@ -24,7 +24,7 @@ Installation
 
 After downloading, you should add edgeaxes.m to your matlab path. For example:
 
-    `addpath('/path/to/mat-edge-axes/')`
+    addpath('/path/to/mat-edge-axes/')
     
 Note that edgeaxes.m is a standalone function and you don't necessarily need tick.m, label.m or autotick.m. However, these are very helpful in many practical situations and you might find it faster to use those functions than write your own.  
 
