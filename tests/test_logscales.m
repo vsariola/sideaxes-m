@@ -34,9 +34,9 @@ function make_test_plot
     hold off;
     axis([1 10 1 10]);
     edgeaxes(ax,'west','size',0.1);
-    ticks(x);
+    tick(x);
     edgeaxes(ax,'south','size',0.1);
-    ticks(x);
+    tick(x);
     axes(ax);
 end
 

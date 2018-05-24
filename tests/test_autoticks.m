@@ -29,10 +29,10 @@ function make_test_plot(x,y)
     hold off;    
     edgeaxes(ax,'west','size',1);
     rangeline(min(y),max(y));
-    autoticks();
+    autotick();
     edgeaxes(ax,'south','size',1);
     rangeline(min(y),max(y));
-    autoticks();
+    autotick();
     axes(ax);
 end
 

@@ -1,4 +1,42 @@
 function ret = labels(varargin)
+% label Draws (tick)labels in an axes object created by edgeaxes.
+%   label(x) adds labels at positions defined by x. If x is omitted, it
+%   defaults to mean(xlim(gca)).
+%
+%   Example: (run after having plot something)
+%       edgeaxes('south');
+%       tick(-5:5);
+%       label(-5:5);
+%
+%   label(...,y). Y-coordinate of each label, vector or a scalaer. If y is a
+%   singleton, it is expanded for every x. Defaults to 0.2.
+%  
+%   label(...,s). S defines the text to draw at the position(s) defined by
+%   x and y. S can be:
+%       1) a string, in which it is printed as it is
+%       2) a numeric value, in which case it is converted to string using
+%       num2str
+%       3) a function that takes 1 argument and returns a value. In this
+%       case, the x-coordinates is passed to the function and the value is
+%       displayed. Example: @(x) sprintf('%.1f',x)
+%       4) a function that takes 2 arguments and returns a value. In this
+%       case, the x- and y-coordinates are passed to the function and the value is
+%       displayed. Example: @(x,y) sprintf('(%.1f,%.1f)',x,y)
+%       5) a function that takes 3 arguments and returns a value. In this
+%       case, the x- and y-coordinates and index of the tick are passed to
+%       the function. If you want to label data points, the index is useful
+%       if there is a lookup table to find the name of each data point.
+%
+%   label(...,Name,Value) specifies edgeaxes properties using one or
+%   more Name,Value pair arguments:
+%   
+%       side - 'north','northeast','east', etc. or 'middle'. If the axes
+%           object has UserData, it uses that. Otherwise defaults to 'east'.
+%       orientation - 'vertical' or 'horizontal'. Default: 'vertical'
+%
+%   H = label(...) returns a cell array of the text objects created.
+%
+%   See also edgeaxes, tick, autotick.
 
     [ax,arg,narg] = axescheck(varargin{:});
     
@@ -6,9 +44,8 @@ function ret = labels(varargin)
         ax = gca;
     end
     
-    if (narg < 1 || isempty(arg{1}))
-        xlim = get(gca,'XLim');
-        arg{1} = mean(xlim);
+    if (narg < 1 || isempty(arg{1}))        
+        arg{1} = mean(xlim(gca));
     end
     
     if (narg < 2|| isempty(arg{2}))

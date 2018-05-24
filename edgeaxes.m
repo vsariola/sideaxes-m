@@ -14,7 +14,8 @@ function ret = edgeaxes(varargin)
 %       gap - adds small gap between the edges of the axes in the units
 %           defined by 'units'. Default: 0.
 %       size - size (width or height) of the other edge, which was not
-%           shared with the 
+%           shared with the parent axes. By default, the new axes extends
+%           all the way to the edge of the figure.
 %       link - true (default) or false. If this setting is on, the
 %           bordering axis of the parent and child axes objects will be the
 %           same. They will have the same limits, scale (logarithmic or
@@ -29,25 +30,26 @@ function ret = edgeaxes(varargin)
 %           'characters'. gap and size are defined in these units. Default:
 %           'centimeters'
 %
-%   Any extra name-value pairs are passed forward to the axes.
+%   Any extra name-value pairs are passed forward to the axes command
+%   called internally.
 %
-%   Example: visualize rug plot, medians and quantiles on the edge of an
-%   axes object. ticks, rangeline and labels all take advantage of the
-%   easy coordinate system set up by edgeaxes, and note the extra plot
-%   command that adds a dot right at the median
+%   Example: visualize medians and quantiles on the edge of an
+%   axes object.
 %
-%       x = randn(100,1);
+%       x = randn(100,1)+0.5;                % synthesize data
 %       y = randn(100,1);
-%       axes('Position',[0.1 0.9 0.1 0.9]
-%       plot(x,y,'.');
-%       edgeaxes('south')
-%       ticks(x);
-%       rangeline(min(x),quantile(x,0.25));
-%       plot(median(x),0,'k.','MarkerSize',10);
-%       labels(median(x));
-%       rangeline(quantile(x,0.25),max(x));       
+%       axes('Position',[0.05 0.1 0.9 0.9]); % create main axes
+%       plot(x,y,'.'); 
+%       set(gca,'visible','off')             % disable matlab's own tick marks
+%       edgeaxes('south');                   % add edgeaxes to south for ticks
+%       tick(-5:5);                          % add custom tick marks
+%       label(-5:5);                         % add custom labels for the tick marks
+%       rangeline(min(x),quantile(x,0.25));  % show minimum and first quantile
+%       plot(median(x),0,'k.','MarkerSize',10); % show median as a dot
+%       label(median(x),[],@(x) sprintf('%.1f',x),'Clipping','off');
+%       rangeline(quantile(x,0.75),max(x));  % third quantile  
 %
-%   See also ticks, labels.
+%   See also tick, label, autotick.
 
     [ax,arg] = axescheck(varargin{:});
 
@@ -101,6 +103,8 @@ function ret = edgeaxes(varargin)
     d = reshape(d,1,numel(d));
     ret = axes(fig,'Position',subpos,'units','normalized','visible','off','ClippingStyle','3dbox',d{:});    
     ret.UserData = p.Results.side;        
+    
+    hold on;
     
     orientation = p.Results.orientation;
     if strcmp(orientation,'relative')
