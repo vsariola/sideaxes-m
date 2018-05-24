@@ -18,14 +18,16 @@ function test_logscales
     ax = axes('position',[0.6 0.6 0.4 0.4],'visible','off');
     make_test_plot();
     ax.XScale = 'log';
-    ax.YScale = 'log';    
+    ax.XDir = 'reverse';
+    ax.YScale = 'log';  
+    ax.YDir = 'reverse';
     
     rmpath('..');
 end
 
 function make_test_plot
     ax = gca;
-    x = 2:10;
+    x = 2:9;
     hold on;
     plot(x,2,'k.');
     plot(2,x,'k.');

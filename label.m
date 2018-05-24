@@ -6,6 +6,11 @@ function ret = labels(varargin)
         ax = gca;
     end
     
+    if (narg < 1 || isempty(arg{1}))
+        xlim = get(gca,'XLim');
+        arg{1} = mean(xlim);
+    end
+    
     if (narg < 2|| isempty(arg{2}))
         arg{2} = 0.2;
     end
@@ -40,17 +45,17 @@ function ret = labels(varargin)
         y = y*ones(size(x));
     end   
     
-    if findstr(p.Results.side, 'north')
+    if strfind(p.Results.side, 'north')
         i1 = 3;
-    elseif findstr(p.Results.side, 'south')
+    elseif strfind(p.Results.side, 'south')
         i1 = 1;
     else
         i1 = 2;
     end
     
-    if findstr(p.Results.side, 'west')
+    if strfind(p.Results.side, 'west')
         i2 = 3;
-    elseif findstr(p.Results.side, 'east')
+    elseif strfind(p.Results.side, 'east')
         i2 = 1;
     else
         i2 = 2;
@@ -88,6 +93,9 @@ function ret = labels(varargin)
                 error('Functionhandle labels should take either 1 parameter (x), 2 parameters (x,y) or 3 parameters (x,y,index)');
             end           
         end                      
+        if isnumeric(str)
+            str = num2str(str);
+        end
         fret = text(ax,x,y,str,'FontName','Arial','FontSize',10,'Rotation',rotation,'VerticalAlign',valign,'HorizontalALign',halign,'Clipping','on',d{:});
     end
 end

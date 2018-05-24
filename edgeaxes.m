@@ -1,7 +1,8 @@
 function ret = edgeaxes(varargin)
 % edgeaxes Creates axes that shares an edge with an existing axes object
 %   edgeaxes(S) where S is 'north','east','south' or 'west' creates a new
-%   axes graphics object relative to current axes object.
+%   axes graphics object relative to current axes object on the side
+%   specified by S.
 %
 %   edgeaxes(AX,...) creates the new axes object relative to axes AX
 %
@@ -14,17 +15,21 @@ function ret = edgeaxes(varargin)
 %           defined by 'units'. Default: 0.
 %       size - size (width or height) of the other edge, which was not
 %           shared with the 
-%       link - true (default) or false. Callback functions are added to
-%           both original and created axes objects to make sure that
-%           changing the limits of one changes them in another, allowing
-%           dynamic zooming etc.
+%       link - true (default) or false. If this setting is on, the
+%           bordering axis of the parent and child axes objects will be the
+%           same. They will have the same limits, scale (logarithmic or
+%           linear) etc. When this setting is false, the newly create
+%           child axes object will have limits of [0 1]. Callback functions 
+%           make sure that the relationship is maintained.
 %       orientation - 'relative' (default),'west','east','south' or 'north'
 %           Defines how the created axes is oriented. Positive y-direction
-%           is pointing to this direction,
+%           is pointing to this direction. 'relative' means the orientation
+%           is the same as S parameter.
 %       units - 'normalized','inches','centimeters','points','pixels' or
-%           'characters'. Def
+%           'characters'. gap and size are defined in these units. Default:
+%           'centimeters'
 %
-%   Any extra Name,Value pairs are passed forward to the axes.
+%   Any extra name-value pairs are passed forward to the axes.
 %
 %   Example: visualize rug plot, medians and quantiles on the edge of an
 %   axes object. ticks, rangeline and labels all take advantage of the
@@ -44,7 +49,7 @@ function ret = edgeaxes(varargin)
 %
 %   See also ticks, labels.
 
-    [ax,arg,~] = axescheck(varargin{:});
+    [ax,arg] = axescheck(varargin{:});
 
     if (isempty(ax))
         ax = gca;
@@ -61,7 +66,7 @@ function ret = edgeaxes(varargin)
     addParameter(p,'gap',0,@isnumeric);
     addParameter(p,'link',true);
     addParameter(p,'size',[],@(x) isempty(x) || isnumeric(x));
-    addParameter(p,'units','centimeter',@(x) any(validatestring(x,expectedUnits)));
+    addParameter(p,'units','centimeters',@(x) any(validatestring(x,expectedUnits)));
     addParameter(p,'orientation','relative',@(x) any(validatestring(x,expectedOrientation)));
     parse(p,arg{1},arg{2:end});
 
@@ -103,57 +108,53 @@ function ret = edgeaxes(varargin)
     end
         
     if strcmp(orientation,'west')
-        ret.View = ax.View - [90 0];                     
+        ret.View = [-90 90];                     
     elseif strcmp(orientation,'east')
-        ret.View = ax.View - [90 0];              
-        set(ret,'ydir','reverse');
-    elseif strcmp(orientation,'south')    
-        set(ret,'ydir','reverse')            
+        ret.View = [90 90];                      
+    elseif strcmp(orientation,'south')            
+        ret.View = [180 90];        
     end           
-    
-    sides = {'north','west','south','east'};        
-    IndexOrientation = strfind(sides, orientation);        
-    indOrient = find(not(cellfun('isempty', IndexOrientation)));                
-    IndexSide = strfind(sides, p.Results.side);        
-    indSide = find(not(cellfun('isempty', IndexSide)));
-    r2 = mod(indOrient-indSide,2);
         
-    if abs(r2 - 1) == 0 
-        ret.XLim = [0 size];
+    side = p.Results.side;
+ 
+    if strcmp(side,'west') || strcmp(side,'east')
+        otherInd = 1;
     else
-        ret.YLim = [0 size];
+        otherInd = 2;
     end
     
-    epsilon = 1e-8;
-    callback();
+    otherlim = findAxis(ret,otherInd);
     
+    ret.(otherlim) = [0 size];
+
     if p.Results.link
-        addlistener(ax,{'XLim','YLim','XScale','YScale'},'PostSet',@callback);        
+        callback();
+        addlistener(ax,{'XLim','YLim','XScale','YScale','XDir','YDir','View'},'PostSet',@callback);        
     end
-    
+           
     function callback(~,~)               
-        r1 = mod(ax.View(1)-(indSide-1)*90,180);        
-        if any(abs(r1 - [0 180]) < epsilon)
-            if abs(r2 - 1) == 0                
-                ret.YLim = ax.XLim;
-                ret.YScale = ax.XScale;
-                ret.YDir = ax.XDir;
+        if strcmp(side,'west') || strcmp(side,'east')
+            screenCordinateIndex = 2;
+        else
+            screenCordinateIndex = 1;
+        end
+                        
+        [srclim,srcscale,srcdir,s1] = findAxis(ax,screenCordinateIndex);        
+        [dstlim,dstscale,dstdir,s2] = findAxis(ret,screenCordinateIndex);
+        
+        flipped = s1 * s2 < 0;
+              
+        ret.(dstlim) = ax.(srclim);
+        ret.(dstscale) = ax.(srcscale);  
+        if flipped
+            if strcmp(ax.(srcdir),'reverse')
+                ret.(dstdir) = 'normal';
             else
-                ret.XLim = ax.XLim;
-                ret.XScale = ax.XScale;
-                ret.XDir = ax.XDir;
+                ret.(dstdir) = 'reverse';
             end
-        elseif any(abs(r1 - [90 270]) < epsilon)
-            if abs(r2 - 1) == 0
-                ret.YLim = ax.YLim;
-                ret.YScale = ax.YScale;
-                ret.YDir = ax.YDir;
-            else
-                ret.XLim = ax.YLim;
-                ret.XScale = ax.YScale;
-                ret.XDir = ax.YDir;
-            end
-        end     
+        else
+            ret.(dstdir) = ax.(srcdir);
+        end
     end
     
     function ret = getInUnits(ax,property,unitType)
@@ -164,5 +165,15 @@ function ret = edgeaxes(varargin)
         set(ax,'Units',unitType);
         ret = get(ax,property);
         set(ax,'Units',oldUnits);
+    end
+
+    function [lim,scale,dir,sgn] = findAxis(ax,screenCoordinateIndex)
+        axview = ax.View;
+        v = viewmtx(axview(1),axview(2));
+        [~,ind] = max(abs(v(screenCoordinateIndex,1:3)));
+        prefixes = 'XYZ';
+        prefix = prefixes(ind);
+        [lim,scale,dir] = deal([prefix 'Lim'],[prefix 'Scale'],[prefix 'Dir']);
+        sgn = sign(v(screenCoordinateIndex,ind));
     end
 end
