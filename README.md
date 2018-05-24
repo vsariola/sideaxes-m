@@ -63,4 +63,4 @@ The inspiration for this toolbox came from reading Edward Tufte's "Visual Displa
 License
 =======
 
-MIT, see [LICENSE.MD](LICENSE.MD)
+MIT, see [LICENSE](LICENSE)
