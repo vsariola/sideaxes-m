@@ -26,24 +26,24 @@ axis([x1 x2 y1 y2]+[-ex ex -ey ey]);
 set(gca,'visible','off');
 ax = gca;
 
-edgeaxes(ax,'west','size',0.6);
+sideaxes(ax,'west','size',0.6);
 rangeline(min(y),max(y));
 d = 0.5;
-ytick = ceil(y1/d+0.4)*d:d:floor(y2/d-0.4)*d;
-tick(ytick);
-label(ytick);
-label([y1 y2]);
-edgeaxes('west','link',false);
-label([],[],'Sepal length (cm)','Orientation','vertical');
+yticks = ceil(y1/d+0.4)*d:d:floor(y2/d-0.4)*d;
+ticks(yticks);
+labels(yticks);
+labels([y1 y2]);
+sideaxes('west','link',false);
+labels([],[],'Sepal length (cm)','Orientation','vertical');
 
-edgeaxes(ax,'south','size',0.5);
+sideaxes(ax,'south','size',0.5);
 rangeline(min(x),max(x));
 d = 0.5;
-xtick = ceil(x1/d+0.7)*d:d:floor(x2/d-0.7)*d;
-tick(xtick);
-label(xtick);
-label([x1 x2]);
-edgeaxes('south','link',false);
-label([],[],'Sepal width (cm)');
+xticks = ceil(x1/d+0.7)*d:d:floor(x2/d-0.7)*d;
+ticks(xticks);
+labels(xticks);
+labels([x1 x2]);
+sideaxes('south','link',false);
+labels([],[],'Sepal width (cm)');
 
 rmpath('..');

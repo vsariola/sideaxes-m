@@ -25,25 +25,25 @@ ey = (y2 - y1) * .05;
 axis([x1 x2 y1 y2]+[-ex ex -ey ey]);
 hold on;
 
-westax = edgeaxes(ax,'west','size',0.9);
+westax = sideaxes(ax,'west','size',0.9);
 rangeline(min(y),max(y),0.4);
 d = 1;
-ytick = ceil(y1/d+0.4)*d:d:floor(y2/d-0.4)*d;
-tick(ytick,[0.4;0.5]);
-label(ytick,0.5);
-label([y1 y2],0.5,@(x) sprintf('%.2f',x));
-edgeaxes('west','link',false);
-label([],[],'Y','Orientation','vertical');
+yticks = ceil(y1/d+0.4)*d:d:floor(y2/d-0.4)*d;
+ticks(yticks,[0.4;0.5]);
+labels(yticks,0.5);
+labels([y1 y2],0.5,@(x) sprintf('%.2f',x));
+sideaxes('west','link',false);
+labels([],[],'Y','Orientation','vertical');
 
-southax = edgeaxes(ax,'south','size',0.7);
+southax = sideaxes(ax,'south','size',0.7);
 rangeline(min(x),max(x),0.4);
 d = 1;
-xtick = ceil(x1/d+0.7)*d:d:floor(x2/d-0.7)*d;
-tick(xtick,[0.4;0.5]);
-label(xtick,0.5);
-label([x1 x2],0.5,@(x) sprintf('%.2f',x));
-edgeaxes('south','link',false);
-label([],[],'X');
+xticks = ceil(x1/d+0.7)*d:d:floor(x2/d-0.7)*d;
+ticks(xticks,[0.4;0.5]);
+labels(xticks,0.5);
+labels([x1 x2],0.5,@(x) sprintf('%.2f',x));
+sideaxes('south','link',false);
+labels([],[],'X');
 
 for i = 1:length(datas);
     axes(ax);
@@ -52,10 +52,10 @@ for i = 1:length(datas);
     plot(xx,yy,'.','Color',colors{i});
     
     axes(westax);
-    tick(yy,[-0.2;0]+i*0.2,'Color',colors{i});
+    ticks(yy,[-0.2;0]+i*0.2,'Color',colors{i});
     
     axes(southax);
-    tick(xx,[-0.2;0]+i*0.2,'Color',colors{i});
+    ticks(xx,[-0.2;0]+i*0.2,'Color',colors{i});
 end
 
 rmpath('..');

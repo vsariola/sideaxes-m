@@ -8,9 +8,9 @@ height = 12;
 figure('unit','centimeter','position',[5 5 width height],'color','w');
 
 edge = 1.1;
-ticklength = 0.2;
-subwidth = (width-edge-ticklength-0.05)/2;
-subheight = (height-edge-ticklength-0.05)/2;
+tickslength = 0.2;
+subwidth = (width-edge-tickslength-0.05)/2;
+subheight = (height-edge-tickslength-0.05)/2;
 ax1 = axes('unit','centimeter','Position',[edge edge subwidth subheight],'visible','off');
 
 N = 30;
@@ -27,66 +27,66 @@ xlim(expand([min(data(:,1)) max(data(:,1))]));
 ylim(expand([min(data(:,2)) max(data(:,2))]));
 line([data(1,1);data(1,1)],[data(1,2);20],'Color','k','LineStyle','--');    
 
-edgeaxes(ax1,'west');
+sideaxes(ax1,'west');
 rangeline(-20,20,0);
-tick(-10:10);
-label(-10:10);
-label([],0.7,'Variable 2','orientation','vertical');
+ticks(-10:10);
+labels(-10:10);
+labels([],0.7,'Variable 2','orientation','vertical');
 
-edgeaxes(ax1,'south');
+sideaxes(ax1,'south');
 rangeline(-20,20,0);
-tick(-10:10);
-label(-10:10);
-label([],0.7,'Variable 1');
+ticks(-10:10);
+labels(-10:10);
+labels([],0.7,'Variable 1');
 
-edgeaxes(ax1,'north','size',ticklength);
+sideaxes(ax1,'north','size',tickslength);
 rangeline(-20,20,0);
-tick(data(:,1),[0;ticklength]);
-rangeline(-20,20,ticklength);
+ticks(data(:,1),[0;tickslength]);
+rangeline(-20,20,tickslength);
 
-edgeaxes(ax1,'east','size',ticklength);
+sideaxes(ax1,'east','size',tickslength);
 rangeline(-20,20,0);
-tick(data(:,2),[0;ticklength]);
+ticks(data(:,2),[0;tickslength]);
 
-ax2 = edgeaxes(ax1,'north','gap',ticklength,'size',subheight,'orientation','north')
+ax2 = sideaxes(ax1,'north','gap',tickslength,'size',subheight,'orientation','north')
 hold on;
 plot(data(:,1),data(:,3),'b.');
 line([data(1,1);data(1,1)],[data(1,3);-20],'Color','k','LineStyle','--');    
 line([data(1,1);20],[data(1,3);data(1,3)],'Color','k','LineStyle','--');    
 ylim(expand([min(data(:,3)) max(data(:,3))]));
 
-edgeaxes(ax2,'west');
+sideaxes(ax2,'west');
 rangeline(-20,20,0);
-tick(-10:10);
-label(-10:10);
-label([],0.7,'Variable 3','orientation','vertical');
+ticks(-10:10);
+labels(-10:10);
+labels([],0.7,'Variable 3','orientation','vertical');
 
-edgeaxes(ax2,'east','size',ticklength);
+sideaxes(ax2,'east','size',tickslength);
 rangeline(-20,20,0);
-tick(data(:,3),[0;ticklength]);
-rangeline(-20,20,ticklength);
+ticks(data(:,3),[0;tickslength]);
+rangeline(-20,20,tickslength);
 
-edgeaxes(ax2,'north');
+sideaxes(ax2,'north');
 rangeline(-20,20,0);
 
-ax3 = edgeaxes(ax2,'east','gap',ticklength,'size',subwidth,'orientation','north');
+ax3 = sideaxes(ax2,'east','gap',tickslength,'size',subwidth,'orientation','north');
 hold on;
 plot(data(:,2),data(:,3),'b.');
 line([data(1,2);-20],[data(1,3);data(1,3)],'Color','k','LineStyle','--');    
 xlim(expand([min(data(:,2)) max(data(:,2))]));
 
 
-edgeaxes(ax3,'north');
+sideaxes(ax3,'north');
 rangeline(-20,20,0);
 
-edgeaxes(ax3,'east');
+sideaxes(ax3,'east');
 rangeline(-20,20,0);
 
-edgeaxes(ax3,'south');
+sideaxes(ax3,'south');
 rangeline(-20,20,0);
-tick(-10:10);
-label(-10:10);
-label([],0.7,'Variable 2');
+ticks(-10:10);
+labels(-10:10);
+labels([],0.7,'Variable 2');
 
 
 rmpath('..');

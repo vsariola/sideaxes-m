@@ -33,10 +33,10 @@ function make_test_plot
     plot(2,x,'k.');
     hold off;
     axis([1 10 1 10]);
-    edgeaxes(ax,'west','size',0.1);
-    tick(x);
-    edgeaxes(ax,'south','size',0.1);
-    tick(x);
+    sideaxes(ax,'west','size',0.1);
+    ticks(x);
+    sideaxes(ax,'south','size',0.1);
+    ticks(x);
     axes(ax);
 end
 

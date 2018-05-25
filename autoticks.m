@@ -22,8 +22,8 @@ function autotick(varargin)
     
     function callback(~,~)         
         t = choosetick(p.Results.approximateCount);
-        hticknew = tick(ax,t);
-        hlabelnew = label(ax,t);                
+        hticknew = ticks(ax,t);
+        hlabelnew = labels(ax,t);                
         if ~isempty(htick)            
             delete(htick);                        
         end

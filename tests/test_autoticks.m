@@ -1,4 +1,4 @@
-function test_autoticks    
+function test_autoticks  
     addpath('..');
    
     x = randn(1000,1);
@@ -27,12 +27,12 @@ function make_test_plot(x,y)
     hold on;
     plot(x,y,'k.');   
     hold off;    
-    edgeaxes(ax,'west','size',1);
+    sideaxes(ax,'west','size',1);
     rangeline(min(y),max(y));
-    autotick();
-    edgeaxes(ax,'south','size',1);
+    autoticks();
+    sideaxes(ax,'south','size',1);
     rangeline(min(y),max(y));
-    autotick();
+    autoticks();
     axes(ax);
 end
 

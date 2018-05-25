@@ -10,25 +10,25 @@ hold on;
 plot(x,y,'.');
 % Create first edge axes. We use units centimeters so the 
 % y-axis units are centimeters and thus later when we define e.g. the 
-% length of the tick, that is centimeters 
-sax = edgeaxes('south','size',1);
+% length of the ticks, that is centimeters 
+sax = sideaxes('south','size',1);
 x = -10:10;
-% Add the tick to the centimeter side of things. The label for the
+% Add the ticks to the centimeter side of things. The labels for the
 % centimeter scale are on the northside of things
-tick(x,[0.6 0.7]');
-label(x,0.6,[],'Side','north'); 
-% Draw a black line between the tick
+ticks(x,[0.6 0.7]');
+labels(x,0.6,[],'Side','north'); 
+% Draw a black line between the ticks
 line([-10;10],[0.7;0.7],'Color','k');
-% Add tick to the inch scale. The inch scale tick are pointing south.
-% Note that we define a custom way to create the text for the label
-tick(x*2.54,[0.7;0.8]);
-label(x*2.54,0.8,@(~,~,i) num2str(x(i)),'Side','south');
-% Finally, create one edge axes for the label. This way, the label
+% Add ticks to the inch scale. The inch scale ticks are pointing south.
+% Note that we define a custom way to create the text for the labels
+ticks(x*2.54,[0.7;0.8]);
+labels(x*2.54,0.8,@(~,~,i) num2str(x(i)),'Side','south');
+% Finally, create one edge axes for the labels. This way, the labels
 % won't move even when scaling the axes
-edgeaxes('west','units','centimeters');
-label(0.4,0.1,'cm');
-label(1,0.1,'inch');
-edgeaxes(sax,'south','link',false);
-label([],[],'Length');
+sideaxes('west','units','centimeters');
+labels(0.4,0.1,'cm');
+labels(1,0.1,'inch');
+sideaxes(sax,'south','link',false);
+labels([],[],'Length');
 
 rmpath ..;

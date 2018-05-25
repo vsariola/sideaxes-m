@@ -1,14 +1,14 @@
-function ret = edgeaxes(varargin)
-% edgeaxes Creates axes that shares an edge with an existing axes object
-%   edgeaxes(S) where S is 'north','east','south' or 'west' creates a new
+function ret = sideaxes(varargin)
+% sideaxes Creates axes that shares an edge with an existing axes object
+%   sideaxes(S) where S is 'north','east','south' or 'west' creates a new
 %   axes graphics object relative to current axes object on the side
 %   specified by S.
 %
-%   edgeaxes(AX,...) creates the new axes object relative to axes AX
+%   sideaxes(AX,...) creates the new axes object relative to axes AX
 %
-%   H = edgeaxes(...) returns the axes object created.
+%   H = sideaxes(...) returns the axes object created.
 %
-%   edgeaxes(...,Name,Value) specifies edgeaxes properties using one or
+%   sideaxes(...,Name,Value) specifies sideaxes properties using one or
 %   more Name,Value pair arguments:
 %   
 %       gap - adds small gap between the edges of the axes in the units
@@ -41,7 +41,7 @@ function ret = edgeaxes(varargin)
 %       axes('Position',[0.05 0.1 0.9 0.9]); % create main axes
 %       plot(x,y,'.'); 
 %       set(gca,'visible','off')             % disable matlab's own tick marks
-%       edgeaxes('south');                   % add edgeaxes to south for ticks
+%       sideaxes('south');                   % add sideaxes to south for ticks
 %       tick(-5:5);                          % add custom tick marks
 %       label(-5:5);                         % add custom labels for the tick marks
 %       rangeline(min(x),quantile(x,0.25));  % show minimum and first quantile
