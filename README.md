@@ -47,7 +47,7 @@ y = randn(100,1);
 axes('Position',[0.05 0.1 0.9 0.9]); % create main axes
 plot(x,y,'.'); 
 set(gca,'visible','off')             % disable matlab's own tick marks
-sideaxes('south');                   % add edgeaxes to south for ticks
+sideaxes('south');                   % add sideaxes to south for ticks
 ticks(-5:5);                         % add custom tick marks
 labels(-5:5);                        % add custom labels for the tick marks
 rangeline(min(x),quantile(x,0.25));  % show minimum and first quantile
@@ -58,7 +58,7 @@ rangeline(quantile(x,0.75),max(x));  % third quantile
 
 produces:
 
-![alt text](https://github.com/vsariola/mat-edge-axes/raw/master/images/quickexample.png "Quick example plot that shows median, min and maximum on the edge")
+![alt text](https://github.com/vsariola/sideaxes-m/raw/master/images/quickexample.png "Quick example plot that shows median, min and maximum on the frame")
 
 Tips
 ----
@@ -68,25 +68,26 @@ Tips
 - The `location` parameter passed to `sideaxes.m` is stored in the UserData of the newly created axes. This is a bit of a hack, but `labels.m` uses this to know on which side to display the labels by default. You may need this information if you write generic functions to work along with `sideaxes.m`.
 - All of the functions provided pass unrecognized name value parameter pairs to the functions used internally. Thus: `ticks(...,'Color','b')` and `labels(...,'FontName','Times New Roman')` both work.
 - `ticks.m` can make the ticks go inside the plot area: just disable clipping by `ticks(...,'clipping','off')`. Ticks does not recognize this parameter - it is just passed forward to the internally used `line` command.
+- use `sideaxes('east','orientation','north')` to keep the Y-axis pointing up when making two plots side by side.
 
 More examples
 -------------
 
 Include outside and inside tick marks with different scales, for example inches and centimeters (source: [examples/example_multipleticks.m](examples/example_multipleticks.m))
 
-![alt text](https://github.com/vsariola/mat-edge-axes/raw/master/images/twoscales.png "Example displaying inch and cm ticks in a plot")
+![alt text](https://github.com/vsariola/sideaxes-m/raw/master/images/twoscales.png "Example displaying inch and cm ticks in a plot")
 
 Use dashes on the edge to visualize marginal distributions (Tufte calls this dot-dash plot) (source: [examples/example_dotdash.m](examples/example_dotdash.m))
 
-![alt text](https://github.com/vsariola/mat-edge-axes/raw/master/images/dotdash.png "Example of a dot-dash plot")
+![alt text](https://github.com/vsariola/sideaxes-m/raw/master/images/dotdash.png "Example of a dot-dash plot")
 
 The frame line extends to the minimum/maximum of data (source: [examples/example_rangeframe.m](examples/example_rangeframe.m))
 
-![alt text](https://github.com/vsariola/mat-edge-axes/raw/master/images/rangeframe.png "Example of a range frame")
+![alt text](https://github.com/vsariola/sideaxes-m/raw/master/images/rangeframe.png "Example of a range frame")
 
 Rug plots, which is a combination of several dot-dash plots. (source: [examples/example_rugplot.m](examples/example_rugplot.m))
 
-![alt text](https://github.com/vsariola/mat-edge-axes/raw/master/images/rugplot.png "Example of a rug plot")
+![alt text](https://github.com/vsariola/sideaxes-m/raw/master/images/rugplot.png "Example of a rug plot")
 
 For publication quality plots, working in centimeters or inches is recommended, and then using the fantastic export_fig (https://se.mathworks.com/matlabcentral/fileexchange/23629-export-fig) toolbox for exporting.
 
