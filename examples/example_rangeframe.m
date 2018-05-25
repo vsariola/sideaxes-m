@@ -2,7 +2,7 @@ addpath('..');
 
 close all
 figure('unit','centimeter','position',[5 5 8 6],'color','w');
-ax = axes('Position',[0.15 0.2 0.85 0.8],'visible','off');
+axes('Position',[0.15 0.2 0.85 0.8],'visible','off');
 
 data = readtable('iris.data.txt','Delimiter',',','Format','%f%f%f%f%s');
 groups = table2array(unique(data(:,5)));

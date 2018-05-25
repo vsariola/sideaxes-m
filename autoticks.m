@@ -1,10 +1,10 @@
-function autotick(varargin)   
-% autotick Adds ticks and ticklabels automatically to the edgeaxes
-%   autotick(count) tries to create approximately 'count' number of ticks.
+function autoticks(varargin)   
+% autoticks Adds ticks and ticklabels automatically to the sideaxes
+%   autoticks(count) tries to create approximately 'count' number of ticks.
 %   Note that this is not always exact. By default, count = 5.
-%   Internally, autotick uses tick and label commands.
+%   Internally, autoticks uses ticks and labels commands.
 %
-%   See also edgeaxes, tick, label.
+%   See also sideaxes, ticks, labels.
     [ax,arg] = axescheck(varargin{:});
     if (isempty(ax))
         ax = gca;

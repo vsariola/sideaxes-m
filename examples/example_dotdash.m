@@ -45,17 +45,13 @@ labels([x1 x2],0.5,@(x) sprintf('%.2f',x));
 sideaxes('south','link',false);
 labels([],[],'X');
 
-for i = 1:length(datas);
-    axes(ax);
+for i = 1:length(datas);   
     xx = datas{i}(:,1);
     yy = datas{i}(:,2);
-    plot(xx,yy,'.','Color',colors{i});
-    
-    axes(westax);
-    ticks(yy,[-0.2;0]+i*0.2,'Color',colors{i});
-    
-    axes(southax);
-    ticks(xx,[-0.2;0]+i*0.2,'Color',colors{i});
+    plot(ax,xx,yy,'.','Color',colors{i});
+   
+    ticks(westax,yy,[-0.2;0]+i*0.2,'Color',colors{i});
+    ticks(southax,xx,[-0.2;0]+i*0.2,'Color',colors{i});
 end
 
 rmpath('..');

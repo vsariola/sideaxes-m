@@ -4,7 +4,7 @@ function ret = ticks(varargin)
 %
 %   Example: (run after having plot something)
 %       sideaxes('south');
-%       tick(-5:5);
+%       ticks(-5:5);
 %
 %   ticks(...,y). If y is a singleton, the tickmarks extend from 0 to y,
 %   effectively making them have the length y. If y is a 2 x 1 vector, the

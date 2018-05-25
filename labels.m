@@ -1,17 +1,17 @@
 function ret = labels(varargin)
-% label Draws (tick)labels in an axes object created by edgeaxes.
-%   label(x) adds labels at positions defined by x. If x is omitted, it
+% labels Draws (tick)labels in an axes object created by edgeaxes.
+%   labels(x) adds labels at positions defined by x. If x is omitted, it
 %   defaults to mean(xlim(gca)).
 %
 %   Example: (run after having plot something)
-%       edgeaxes('south');
+%       sideaxes('south');
 %       tick(-5:5);
 %       label(-5:5);
 %
-%   label(...,y). Y-coordinate of each label, vector or a scalaer. If y is a
+%   labels(...,y). Y-coordinate of each label, vector or a scalaer. If y is a
 %   singleton, it is expanded for every x. Defaults to 0.2.
 %  
-%   label(...,s). S defines the text to draw at the position(s) defined by
+%   labels(...,s). S defines the text to draw at the position(s) defined by
 %   x and y. S can be:
 %       1) a string, in which it is printed as it is
 %       2) a numeric value, in which case it is converted to string using
@@ -27,16 +27,17 @@ function ret = labels(varargin)
 %       the function. If you want to label data points, the index is useful
 %       if there is a lookup table to find the name of each data point.
 %
-%   label(...,Name,Value) specifies edgeaxes properties using one or
+%   labels(...,Name,Value) specifies edgeaxes properties using one or
 %   more Name,Value pair arguments:
 %   
-%       side - 'north','northeast','east', etc. or 'middle'. If the axes
-%           object has UserData, it uses that. Otherwise defaults to 'east'.
+%       location - 'north','northeast','east', etc. or 'center'. If the
+%           axes object has UserData, labels uses that. Otherwise defaults
+%           to 'east'.
 %       orientation - 'vertical' or 'horizontal'. Default: 'vertical'
 %
-%   H = label(...) returns a cell array of the text objects created.
+%   H = labels(...) returns a cell array of the text objects created.
 %
-%   See also edgeaxes, tick, autotick.
+%   See also sideaxes, ticks, autoticks.
 
     [ax,arg,narg] = axescheck(varargin{:});
     
@@ -56,13 +57,13 @@ function ret = labels(varargin)
         arg{3} = @(x) num2str(x);
     end
     
-    expectedSides = {'north','south','west','east','northwest','northeast','southwest','southeast','middle'};
+    expectedLocation = {'north','south','west','east','northwest','northeast','southwest','southeast','center'};
     expectedOrientation = {'horizontal','vertical'};
     
-    if ~isempty(ax.UserData) && any(validatestring(ax.UserData,expectedSides))
-        defaultSide = ax.UserData;
+    if ~isempty(ax.UserData) && any(validatestring(ax.UserData,expectedLocation))
+        defaultLocation = ax.UserData;
     else
-        defaultSide = 'east';
+        defaultLocation = 'east';
     end
             
     p = inputParser();
@@ -70,7 +71,7 @@ function ret = labels(varargin)
     addRequired(p,'x',@isnumeric);    
     addRequired(p,'y',@isnumeric);    
     addRequired(p,'text');    
-    addParameter(p,'side',defaultSide,@(x) any(validatestring(x,expectedSides)));    
+    addParameter(p,'location',defaultLocation,@(x) any(validatestring(x,expectedLocation)));    
     addParameter(p,'orientation','horizontal',@(x) any(validatestring(x,expectedOrientation)));
     parse(p,arg{:});
     x = p.Results.x;
@@ -82,17 +83,17 @@ function ret = labels(varargin)
         y = y*ones(size(x));
     end   
     
-    if strfind(p.Results.side, 'north')
+    if strfind(p.Results.location, 'north')
         i1 = 3;
-    elseif strfind(p.Results.side, 'south')
+    elseif strfind(p.Results.location, 'south')
         i1 = 1;
     else
         i1 = 2;
     end
     
-    if strfind(p.Results.side, 'west')
+    if strfind(p.Results.location, 'west')
         i2 = 3;
-    elseif strfind(p.Results.side, 'east')
+    elseif strfind(p.Results.location, 'east')
         i2 = 1;
     else
         i2 = 2;

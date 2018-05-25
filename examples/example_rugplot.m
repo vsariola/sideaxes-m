@@ -48,7 +48,7 @@ sideaxes(ax1,'east','size',tickslength);
 rangeline(-20,20,0);
 ticks(data(:,2),[0;tickslength]);
 
-ax2 = sideaxes(ax1,'north','gap',tickslength,'size',subheight,'orientation','north')
+ax2 = sideaxes(ax1,'north','gap',tickslength,'size',subheight,'orientation','north');
 hold on;
 plot(data(:,1),data(:,3),'b.');
 line([data(1,1);data(1,1)],[data(1,3);-20],'Color','k','LineStyle','--');    
