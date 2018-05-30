@@ -42,14 +42,14 @@ function ret = sideaxes(varargin)
 %       plot(x,y,'.'); 
 %       set(gca,'visible','off')             % disable matlab's own tick marks
 %       sideaxes('south');                   % add sideaxes to south for ticks
-%       tick(-5:5);                          % add custom tick marks
-%       label(-5:5);                         % add custom labels for the tick marks
+%       ticks(-5:5);                          % add custom tick marks
+%       labels(-5:5);                         % add custom labels for the tick marks
 %       rangeline(min(x),quantile(x,0.25));  % show minimum and first quantile
 %       plot(median(x),0,'k.','MarkerSize',10); % show median as a dot
-%       label(median(x),[],@(x) sprintf('%.1f',x),'Clipping','off');
+%       labels(median(x),[],@(x) sprintf('%.1f',x),'Clipping','off');
 %       rangeline(quantile(x,0.75),max(x));  % third quantile  
 %
-%   See also tick, label, autotick.
+%   See also ticks, labels, autoticks.
 
     [ax,arg] = axescheck(varargin{:});
 
