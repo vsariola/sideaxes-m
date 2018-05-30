@@ -20,7 +20,7 @@ Are you trying to make publication quality plots in MATLAB? Are you struggling w
 
 The key novelty of `sideaxes.m` is that in its default mode of operation, the new axes object has a convenient coordinate system (see the figure below). The x-axis is linked to the original x- or y-axis of the parent, and y-axis is pointing away from the main axes. Y-coordinate is in centimeters, so you are effectively plotting in "centimeters away from the main axes". This coordinate system is convenient for ticks (e.g. dot-dash plots or having multiple scales on one axis) or range frames.
 
-![alt text](https://github.com/vsariola/mat-edge-axes/raw/master/images/coordinatesystem.png "Coordinate systems set up by the edgeaxes.m")
+![alt text](./images/coordinatesystem.svg "Coordinate systems set up by the sideaxes.m")
 
 `sideaxis.m` can also be used to make two axis side by side with their x-axis or y-axis just linked. This is really convenient for making small multiples or having several plots sharing one x-axis or y-axis.
 
@@ -58,7 +58,7 @@ rangeline(quantile(x,0.75),max(x));  % third quantile
 
 produces:
 
-![alt text](https://github.com/vsariola/sideaxes-m/raw/master/images/quickexample.png "Quick example plot that shows median, min and maximum on the frame")
+![alt text](./images/quickexample.svg "Quick example plot that shows median, min and maximum on the frame")
 
 Tips
 ----
@@ -69,27 +69,31 @@ Tips
 - All of the functions provided pass unrecognized name value parameter pairs to the functions used internally. Thus: `ticks(...,'Color','b')` and `labels(...,'FontName','Times New Roman')` both work.
 - `ticks.m` can make the ticks go inside the plot area: just disable clipping by `ticks(...,'clipping','off')`. Ticks does not recognize this parameter - it is just passed forward to the internally used `line` command.
 - use `sideaxes('east','orientation','north')` to keep the Y-axis pointing up when making two plots side by side.
+- For publication quality plots, working in centimeters or inches is recommended, and then using the fantastic export_fig (https://se.mathworks.com/matlabcentral/fileexchange/23629-export-fig) toolbox for exporting.
+- To make SVG plots for the web: use export_fig to create .pdf, then use inkscape to convert .pdf to .svg
 
 More examples
 -------------
 
 Include outside and inside tick marks with different scales, for example inches and centimeters (source: [examples/example_multipleticks.m](examples/example_multipleticks.m))
 
-![alt text](https://github.com/vsariola/sideaxes-m/raw/master/images/twoscales.png "Example displaying inch and cm ticks in a plot")
+![alt text](./images/multipleticks.svg  "Example displaying inch and cm ticks in a plot")
 
 Use dashes on the edge to visualize marginal distributions (Tufte calls this dot-dash plot) (source: [examples/example_dotdash.m](examples/example_dotdash.m))
 
-![alt text](https://github.com/vsariola/sideaxes-m/raw/master/images/dotdash.png "Example of a dot-dash plot")
+![alt text](./images/dotdash.svg "Example of a dot-dash plot")
+
+The histograms show marginal distributions (source: [examples/example_histograms.m](examples/example_histograms.m))
+
+![alt text](./images/histograms.svg "Example of marginal histograms")
 
 The frame line extends to the minimum/maximum of data (source: [examples/example_rangeframe.m](examples/example_rangeframe.m))
 
-![alt text](https://github.com/vsariola/sideaxes-m/raw/master/images/rangeframe.png "Example of a range frame")
+![alt text](./images/rangeframe.svg "Example of a range frame")
 
 Rug plots, which is a combination of several dot-dash plots. (source: [examples/example_rugplot.m](examples/example_rugplot.m))
 
-![alt text](https://github.com/vsariola/sideaxes-m/raw/master/images/rugplot.png "Example of a rug plot")
-
-For publication quality plots, working in centimeters or inches is recommended, and then using the fantastic export_fig (https://se.mathworks.com/matlabcentral/fileexchange/23629-export-fig) toolbox for exporting.
+![alt text](./images/rugplot.svg "Example of a rug plot")
 
 Credits
 =======
