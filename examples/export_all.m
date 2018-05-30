@@ -12,10 +12,12 @@ function export_all
         s = regexp(n,'example_(\w+)','once','tokens');
         warning('');
         exportedName = sprintf('../images/pdfs/%s.pdf',s{1});
-        export_fig(exportedName);
+        export_fig(exportedName,'-transparent');
         [warnMsg, warnId] = lastwarn;
         if ~isempty(warnMsg)
             fig = gcf;
+            fig.Color = 'none';
+            fig.InvertHardcopy = 'off';
             fig.PaperPositionMode = 'auto';
             fig_pos = fig.PaperPosition;
             fig.PaperSize = [fig_pos(3) fig_pos(4)];
