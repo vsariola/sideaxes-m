@@ -16,18 +16,18 @@ x = -10:10;
 % Add the ticks to the centimeter side of things. The labels for the
 % centimeter scale are on the northside of things
 ticks(x,[0.6 0.7]');
-labels(x,0.6,[],'location','north'); 
+labels(x,0.6,[],'location','north','FontSize',8); 
 % Draw a black line between the ticks
 line([-10;10],[0.7;0.7],'Color','k');
 % Add ticks to the inch scale. The inch scale ticks are pointing south.
 % Note that we define a custom way to create the text for the labels
 ticks(x*2.54,[0.7;0.8]);
-labels(x*2.54,0.8,@(~,~,i) num2str(x(i)),'location','south');
+labels(x*2.54,0.8,@(~,~,i) num2str(x(i)),'location','south','FontSize',8);
 % Finally, create one edge axes for the labels. This way, the labels
 % won't move even when scaling the axes
 sideaxes('west','units','centimeters');
-labels(0.4,0.1,'cm');
-labels(1,0.1,'inch');
+labels(0.4,0.1,'cm','FontSize',8);
+labels(1,0.1,'inch','FontSize',8);
 sideaxes(sax,'south','link',false);
 labels([],[],'Length');
 

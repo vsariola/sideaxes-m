@@ -3,7 +3,7 @@ addpath('..');
 close all;
 width = 8;
 height = 6;
-b = [2.08 1.98 0.2 0.2];
+b = [1.98 1.98 0.2 0.2];
 figure('unit','centimeter','position',[5 5 8 6],'color','w');
 ax = axes('unit','centimeter','Position',[b(1:2) width-b(1)-b(3) height-b(2)-b(4)],'visible','off');
 
@@ -28,11 +28,11 @@ hold on;
 
 yhistax = sideaxes(ax,'west','size',0.9,'orientation','east','gap',0.1);
 ylim([0 0.1]);
-ytickax = sideaxes('west','size',0.5);
+ytickax = sideaxes('west','size',0.4);
 d = 1;
 yticks = ceil(y1/d)*d:d:floor(y2/d)*d;
 ticks(yticks);
-labels(yticks);
+labels(yticks,[],[],'FontSize',8);
 sideaxes('west','link',false);
 labels([],[],'Y','Orientation','vertical');
 
@@ -43,7 +43,7 @@ xtickax = sideaxes('south','size',0.4);
 d = 1;
 xticks = ceil(x1/d)*d:d:floor(x2/d)*d;
 ticks(xticks);
-labels(xticks);
+labels(xticks,[],[],'FontSize',8);
 sideaxes('south','link',false);
 labels([],[],'X');
 
@@ -53,8 +53,8 @@ for i = 1:length(datas);
     plot(ax,xx,yy,'.','Color',colors{i});   
     h1 = histogram(yhistax,yy,'BinLimits',[y1,y2],'Normalization','pdf','FaceColor',colors{i},'EdgeColor','none','FaceAlpha',0.1);    
     ylim(yhistax,[0 max(max(ylim(yhistax)),max(h1.Values))]);
-    h2 =  histogram(xhistax,xx,'BinLimits',[x1,x2],'Normalization','pdf','FaceColor',colors{i},'EdgeColor','none','FaceAlpha',0.1);      
-    ylim(xhistax,[0 max(max(ylim(yhistax)),max(h2.Values))]);
+    h2 = histogram(xhistax,xx,'BinLimits',[x1,x2],'Normalization','pdf','FaceColor',colors{i},'EdgeColor','none','FaceAlpha',0.1);      
+    ylim(xhistax,[0 max(max(ylim(xhistax)),max(h2.Values))]);
 end
 
 rmpath('..');

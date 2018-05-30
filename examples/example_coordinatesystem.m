@@ -25,32 +25,32 @@ function example_coordinatesystem
     
     sideaxes('west');
     ticks(1:edge);
-    labels(1:edge);
-    labels([],0.5,'cm','orientation','vertical');
+    labels(1:edge,[],[],'FontSize',8);
+    labels([],0.5,'cm','orientation','vertical','FontSize',8);
     
     sideaxes(ax,'south');
     labels(b/2,edge-0.6,'sideaxes(''south'')','location','center');
     draw_arrows();
-    labels(1:b);
+    labels(1:b,[],[],'FontSize',8);
     ticks(1:b,[-0.1;0.1],'Clipping','off');
-    labels([],0.5,'Arbitrary units');
+    labels([],0.5,'Arbitrary units','FontSize',8);
     
     sideaxes('east');
     ticks(1:edge);
-    labels(1:edge);
-    labels([],0.5,'cm','orientation','vertical');
+    labels(1:edge,[],[],'FontSize',8);
+    labels([],0.5,'cm','orientation','vertical','FontSize',8);
     
     sideaxes(ax,'west');
     labels(b/2,edge-0.6,'sideaxes(''west'')','location','center','orientation','vertical');
     draw_arrows();
     ticks(1:b,[-0.1;0.1],'Clipping','off');
-    labels(1:b);
-    labels([],0.5,'Arbitrary units','orientation','vertical');  
+    labels(1:b,[],[],'FontSize',8);
+    labels([],0.5,'Arbitrary units','orientation','vertical','FontSize',8);  
     
     sideaxes('south');
     ticks(1:edge);
-    labels(1:edge);
-    labels([],0.5,'cm');
+    labels(1:edge,[],[],'FontSize',8);
+    labels([],0.5,'cm','FontSize',8);
     
     sideaxes(ax,'east');
     labels(b/2,edge-0.6,'sideaxes(''east'')','location','center','orientation','vertical');
@@ -58,8 +58,8 @@ function example_coordinatesystem
     
     sideaxes('north');
     ticks(1:edge);
-    labels(1:edge);
-    labels([],0.5,'cm');
+    labels(1:edge,[],[],'FontSize',8);
+    labels([],0.5,'cm','FontSize',8);
 
     rmpath ..;
     

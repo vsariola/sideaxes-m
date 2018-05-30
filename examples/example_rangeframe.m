@@ -31,8 +31,8 @@ rangeline(min(y),max(y));
 d = 0.5;
 yticks = ceil(y1/d+0.4)*d:d:floor(y2/d-0.4)*d;
 ticks(yticks);
-labels(yticks);
-labels([y1 y2]);
+labels(yticks,[],[],'FontSize',8);
+labels([y1 y2],[],[],'FontSize',8);
 sideaxes('west','link',false);
 labels([],[],'Sepal length (cm)','Orientation','vertical');
 
@@ -41,8 +41,8 @@ rangeline(min(x),max(x));
 d = 0.5;
 xticks = ceil(x1/d+0.7)*d:d:floor(x2/d-0.7)*d;
 ticks(xticks);
-labels(xticks);
-labels([x1 x2]);
+labels(xticks,[],[],'FontSize',8);
+labels([x1 x2],[],[],'FontSize',8);
 sideaxes('south','link',false);
 labels([],[],'Sepal width (cm)');
 

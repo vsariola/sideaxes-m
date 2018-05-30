@@ -30,13 +30,13 @@ line([data(1,1);data(1,1)],[data(1,2);20],'Color','k','LineStyle','--');
 sideaxes(ax1,'west');
 rangeline(-20,20,0);
 ticks(-10:10);
-labels(-10:10);
+labels(-10:10,[],[],'FontSize',8);
 labels([],0.7,'Variable 2','orientation','vertical');
 
 sideaxes(ax1,'south');
 rangeline(-20,20,0);
 ticks(-10:10);
-labels(-10:10);
+labels(-10:10,[],[],'FontSize',8);
 labels([],0.7,'Variable 1');
 
 sideaxes(ax1,'north','size',tickslength);
@@ -58,7 +58,7 @@ ylim(expand([min(data(:,3)) max(data(:,3))]));
 sideaxes(ax2,'west');
 rangeline(-20,20,0);
 ticks(-10:10);
-labels(-10:10);
+labels(-10:10,[],[],'FontSize',8);
 labels([],0.7,'Variable 3','orientation','vertical');
 
 sideaxes(ax2,'east','size',tickslength);
@@ -85,7 +85,7 @@ rangeline(-20,20,0);
 sideaxes(ax3,'south');
 rangeline(-20,20,0);
 ticks(-10:10);
-labels(-10:10);
+labels(-10:10,[],[],'FontSize',8);
 labels([],0.7,'Variable 2');
 
 
