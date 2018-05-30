@@ -15,6 +15,10 @@ function export_all
         export_fig(exportedName);
         [warnMsg, warnId] = lastwarn;
         if ~isempty(warnMsg)
+            fig = gcf;
+            fig.PaperPositionMode = 'auto';
+            fig_pos = fig.PaperPosition;
+            fig.PaperSize = [fig_pos(3) fig_pos(4)];
             print(gcf, '-dpdf', exportedName); 
         end
     end
